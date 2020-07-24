@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const contactRouter = require('./routes/contactRouter');
 
 const hostname = 'localhost';
 const port = 3000;
@@ -7,6 +9,9 @@ const port = 3000;
 const app = express(); // returns an express server application
 
 app.use(morgan('dev')); // logs request info
+app.use(bodyParser.json());
+
+app.use('/contacts', contactRouter); // provide root path of contactRouter here
 
 // set up express to serve static files
 // std behavior for webserver to serve up the index.html file if send req to hostname
